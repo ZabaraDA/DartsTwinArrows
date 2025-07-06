@@ -5,8 +5,8 @@ public class ProjectilePresenter : IProjectilePresenter
 {
     private IProjectileView _view;
     private IProjectileModel _model;
-    private ProjectileLifeCycleManager _manager;
-    public ProjectilePresenter(IProjectileView view, IProjectileModel model, ProjectileLifeCycleManager manager)
+    private IProjectileLifeCycleManager _manager;
+    public ProjectilePresenter(IProjectileView view, IProjectileModel model, IProjectileLifeCycleManager manager)
     {
         _model = model;
         _view = view;

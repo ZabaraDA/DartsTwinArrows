@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public interface IProjectileLifeCycleManager
+public interface IProjectileLifeCycleManager : ILifeCycleManager<IProjectilePresenter>
 {
-    void RegisterPresenter(IProjectilePresenter presenter);
-    void UnregisterPresenter(IProjectilePresenter presenter);
+
 }

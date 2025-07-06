@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public interface IProjectileFactory
+public interface IProjectileFactory : IFactory<IProjectilePresenter, IProjectileModel>
 {
-    IProjectilePresenter CreateProjectile(int id, Vector2 startPosition, Vector2 direction, IProjectileTypeModel projectileType);
-    IProjectilePresenter CreateProjectile(IProjectileModel projectileModel);
+    IProjectilePresenter Create(int id, string name, Vector2 startPosition, Vector2 direction, IProjectileTypeModel projectileType);
 }

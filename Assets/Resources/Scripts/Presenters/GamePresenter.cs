@@ -18,6 +18,6 @@ public class GamePresenter : IGamePresenter
 
     public void Initialize()
     {
-        
+        Debug.Log("GamePresenter inizialized");
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IUpdatable
+public interface IUpdatable<T>  
 {
-    void Update(float deltaTime);
+    void Update(T updatableParameter);
 }

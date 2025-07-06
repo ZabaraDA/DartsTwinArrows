@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ProjectileFactory : IProjectileFactory
 {
-    private ProjectileLifeCycleManager _manager; // —сылка на менеджер
+    private IProjectileLifeCycleManager _manager; // —сылка на менеджер
 
-    public ProjectileFactory(ProjectileLifeCycleManager manager)
+    public ProjectileFactory(IProjectileLifeCycleManager manager)
     {
         _manager = manager;
     }
 
-    public IProjectilePresenter CreateProjectile(IProjectileModel model)
+    public IProjectilePresenter Create(IProjectileModel model)
     {
         float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
         Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
@@ -34,9 +34,9 @@ public class ProjectileFactory : IProjectileFactory
 
         return presenter;
     }
-    public IProjectilePresenter CreateProjectile(int id, Vector2 position, Vector2 direction, IProjectileTypeModel projectileType)
+    public IProjectilePresenter Create(int id, string name, Vector2 position, Vector2 direction, IProjectileTypeModel projectileType)
     {
-        IProjectileModel model = new ProjectileModel(id, position, direction, projectileType);
-        return CreateProjectile(model);
+        IProjectileModel model = new ProjectileModel(id, name, position, direction, projectileType);
+        return Create(model);
     }
 }
