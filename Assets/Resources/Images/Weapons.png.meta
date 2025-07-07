@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 1eaf9e1f0046ba048a705b267dc922fb
+guid: 713b6e5f4fc0580448ce6cc74570201f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3887926739208216849
-    second: 210e0d7d7a930daed57ee35979f88f10494ec228_0
+      213: -8729259930612790677
+    second: Darts Weapons_0
+  - first:
+      213: -2259305480939058991
+    second: Darts Weapons_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 210e0d7d7a930daed57ee35979f88f10494ec228_0
+      name: Darts Weapons_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 208
-        width: 703
-        height: 793
+        x: 252
+        y: 216
+        width: 848
+        height: 848
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +157,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 111af3b25c0b4f530800000000000000
-      internalID: 3887926739208216849
+      spriteID: b6a06cbb7507bd680800000000000000
+      internalID: -8729259930612790677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darts Weapons_1
+      rect:
+        serializedVersion: 2
+        x: 1405
+        y: 195
+        width: 1022
+        height: 890
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d8c889a2a555a0e0800000000000000
+      internalID: -2259305480939058991
       vertices: []
       indices: 
       edges: []
@@ -174,7 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      210e0d7d7a930daed57ee35979f88f10494ec228_0: 3887926739208216849
+      Darts Weapons_0: -8729259930612790677
+      Darts Weapons_1: -2259305480939058991
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

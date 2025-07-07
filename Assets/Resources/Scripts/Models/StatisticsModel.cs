@@ -18,7 +18,7 @@ public class StatisticsModel : IStatisticsModel
         }
     }
 
-    public float Accuracy => Points / TotalPoints * 100;
+    public float Accuracy => Points > 0 && TotalPoints > 0 ? (Points / TotalPoints * 100) : 0;
 
     private int _points;
     public int Points
@@ -58,6 +58,13 @@ public class StatisticsModel : IStatisticsModel
         Points = points;
         TotalTime = totalTime;
         TotalPoints = totalPoints;
+    }
+
+    public StatisticsModel()
+    {
+        Points = 0;
+        TotalTime = 0;
+        TotalPoints = 0;
     }
 
     public void AddPoints(int points)

@@ -1,8 +1,9 @@
 using System;
-using UnityEngine;
 
 public interface IGameView
 {
-   
+   event Action OnViewPauseButtonClicked;
+   event Action OnViewContinueButtonClicked;
+   void SetActivePausePanel(bool isActive);
 }
 

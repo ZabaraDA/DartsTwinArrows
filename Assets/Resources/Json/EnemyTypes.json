@@ -1,0 +1,36 @@
+{
+  "value": [
+    {
+      "number": 1,
+      "healts": 15,
+      "speed": 0,
+      "isStatic" : true,
+      "points": 150,
+      "spriteNumber" : 1
+    },
+    {
+      "number": 2,
+      "healts": 1,
+      "speed": 100,
+      "isStatic": false,
+      "points": 1,
+      "spriteNumber": 2
+    },
+    {
+      "number": 3,
+      "healts": 1,
+      "speed": 200,
+      "isStatic": false,
+      "points": 1,
+      "spriteNumber": 3
+    },
+    {
+      "number": 4,
+      "healts": 1,
+      "speed": 0,
+      "isStatic": true,
+      "points": 1,
+      "spriteNumber": 4
+    }
+  ]
+}

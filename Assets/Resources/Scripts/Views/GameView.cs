@@ -13,9 +13,39 @@ public class GameView : MonoBehaviour, IGameView
     private TMP_Text _levelText;
     [SerializeField] 
     private Button _pauseButton;
+    [SerializeField] 
+    private Button _continueButton;
+    [SerializeField] 
+    private GameObject _pausePanel;
+    [SerializeField] 
+    private GameObject _menuPanel;
 
     [SerializeField]
     private Transform _weaponSpawnPosition;
     [SerializeField]
     private Transform _enemySpawnPosition;
+
+    public event Action OnViewPauseButtonClicked;
+    public event Action OnViewContinueButtonClicked;
+
+    private void Start()
+    {
+        _pauseButton.onClick.AddListener(OnPauseButtonClicked);
+        _continueButton.onClick.AddListener(OnContinueButtonClicked);
+    }
+
+    private void OnPauseButtonClicked()
+    {
+        OnViewPauseButtonClicked?.Invoke();
+    }
+    private void OnContinueButtonClicked()
+    {
+        OnViewContinueButtonClicked?.Invoke();
+    }
+
+    public void SetActivePausePanel(bool isActive)
+    {
+        _pausePanel.SetActive(isActive);
+        _menuPanel.SetActive(!isActive);
+    }
 }

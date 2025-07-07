@@ -15,6 +15,11 @@ public class StatisticsView : MonoBehaviour, IStatisticsView
         _accurancyText.text = text;
     }
 
+    public void SetActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
     public void SetPointsText(string text)
     {
         _pointsText.text = text;

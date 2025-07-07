@@ -33,9 +33,9 @@ public class WeaponFactory : IWeaponFactory
 
         return presenter;
     }
-    public IWeaponPresenter Create(int id, string name, Sprite sprite, Vector2 position, Vector2 direction, IProjectileTypeModel projectileType)
+    public IWeaponPresenter Create(int id, string name, Vector2 position, Vector2 direction, IWeaponTypeModel type)
     {
-        IWeaponModel model = new WeaponModel(id, name, sprite, position, direction, projectileType);
+        IWeaponModel model = new WeaponModel(id, name, position, direction, type);
         return Create(model);
     }
 }

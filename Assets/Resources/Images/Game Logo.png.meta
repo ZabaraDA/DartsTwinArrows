@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: bb359ad6ddf2c5546b9cee1bf3107718
+guid: 8c80eab9c74b12e4e9abe3cb3edfcd4a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3185887201872873151
-    second: Dart_0
-  - first:
-      213: -8717134524080625685
-    second: Dart_1
+      213: -6987131911658549201
+    second: iPhone 16 Pro Max - 9_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dart_0
+      name: iPhone 16 Pro Max - 9_0
       rect:
         serializedVersion: 2
-        x: 145
-        y: 204
-        width: 263
-        height: 930
+        x: 0
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,30 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fb68812d78b863c20800000000000000
-      internalID: 3185887201872873151
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dart_1
-      rect:
-        serializedVersion: 2
-        x: 801
-        y: 204
-        width: 263
-        height: 930
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: be761e0f554860780800000000000000
-      internalID: -8717134524080625685
+      spriteID: f20dbc6bb88b80f90800000000000000
+      internalID: -6987131911658549201
       vertices: []
       indices: 
       edges: []
@@ -199,8 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dart_0: 3185887201872873151
-      Dart_1: -8717134524080625685
+      iPhone 16 Pro Max - 9_0: -6987131911658549201
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

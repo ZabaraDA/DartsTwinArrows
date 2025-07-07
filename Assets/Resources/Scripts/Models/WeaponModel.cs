@@ -7,21 +7,23 @@ public class WeaponModel : IWeaponModel
     public string Name { get; set; }
     public Vector2 Position { get; set; }
     public Vector2 Direction { get; set; }
-    public IProjectileTypeModel ProjectileType { get; set; }
-    public Sprite _sprite;
-    public Sprite Sprite 
-    {
-        get => _sprite;
-        set
-        {
-            if (_sprite != value)
-            {
-                _sprite = value;
-                OnModelSpriteChanged?.Invoke(_sprite);
-                Debug.Log($"Field '{nameof(Sprite)}' changed in {typeof(WeaponModel)}");
-            }
-        }
-    }
+    public IProjectileTypeModel ProjectileType => Type.ProjectileType;
+    public Sprite Sprite => Type.Sprite;
+    
+    //public Sprite _sprite;
+    //public Sprite Sprite 
+    //{
+    //    get => _sprite;
+    //    set
+    //    {
+    //        if (_sprite != value)
+    //        {
+    //            _sprite = value;
+    //            OnModelSpriteChanged?.Invoke(_sprite);
+    //            Debug.Log($"Field '{nameof(Sprite)}' changed in {typeof(WeaponModel)}");
+    //        }
+    //    }
+    //}
     public Quaternion _rotation; 
     public Quaternion Rotation 
     {
@@ -37,14 +39,15 @@ public class WeaponModel : IWeaponModel
         }
     }
 
-    public WeaponModel(int id, string name, Sprite sprite, Vector2 position, Vector2 direction, IProjectileTypeModel type)
+    public IWeaponTypeModel Type { get; set; }
+
+    public WeaponModel(int id, string name, Vector2 position, Vector2 direction, IWeaponTypeModel type)
     {
         Id = id;
         Name = name;
-        Sprite = sprite;
         Position = position;
-        ProjectileType = type;
         Direction = direction;
+        Type = type;
     }
 
     public event Action<Quaternion> OnModelRotationChanged;

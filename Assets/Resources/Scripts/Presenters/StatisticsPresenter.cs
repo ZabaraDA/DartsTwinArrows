@@ -4,17 +4,21 @@ public class StatisticsPresenter : IStatisticsPresenter
 {
     private IStatisticsView _view;
     private IStatisticsModel _model;
+    private IStatisticsLifeCycleManager _lifeCycleManager;
 
-    public StatisticsPresenter(IStatisticsView view, IStatisticsModel model)
+    public StatisticsPresenter(IStatisticsView view, IStatisticsModel model, IStatisticsLifeCycleManager lifeCycleManager)
     {
         _view = view;
         _model = model;
+        _lifeCycleManager = lifeCycleManager;
     }
     public void Dispose()
     {
         _model.OnModelPointsChanged -= HandleOnModelPointsChanged;
         _model.OnModelTotalTimeChanged -= HandleOnModelTotalTimeChanged;
         _model.OnModelTotalPointsChanged -= HandleOnModelTotalPointsChanged;
+
+        _lifeCycleManager.UnregisterPresenter(this);
     }
 
     public void Initialize()
@@ -23,27 +27,34 @@ public class StatisticsPresenter : IStatisticsPresenter
         _model.OnModelTotalTimeChanged += HandleOnModelTotalTimeChanged;
         _model.OnModelTotalPointsChanged += HandleOnModelTotalPointsChanged;
 
-        _view.SetTimeText(_model.TotalTime.ToString());
-        _view.SetAccurancyText(_model.Accuracy.ToString());
+        _view.SetTimeText(TimeFormatterService.FormatTimeMinutesSeconds(_model.TotalTime));
+        _view.SetAccurancyText($"{_model.Accuracy}%");
         _view.SetPointsText(_model.Points.ToString());
+
+        _lifeCycleManager.RegisterPresenter(this);
     }
 
     private void HandleOnModelTotalTimeChanged(float time)
     {
-        _view.SetTimeText(time.ToString());
+        _view.SetTimeText(TimeFormatterService.FormatTimeMinutesSeconds(time));
     }
     private void HandleOnModelTotalPointsChanged(int totalPoints)
     {
-        _view.SetAccurancyText(_model.Accuracy.ToString());
+        _view.SetAccurancyText($"{_model.Accuracy}%");
     }
     private void HandleOnModelPointsChanged(int points)
     {
         _view.SetPointsText(points.ToString());
-        _view.SetAccurancyText(_model.Accuracy.ToString());
+        _view.SetAccurancyText($"{_model.Accuracy}%");
     }
 
     public void Update(float updatableParameter)
     {
         _model.AddTime(updatableParameter);
+    }
+
+    public void ChangeVisibilityStatisticsPanel(bool isVisible)
+    {
+        _view.SetActive(isVisible);
     }
 }

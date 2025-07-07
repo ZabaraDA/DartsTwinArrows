@@ -1,0 +1,36 @@
+{
+  "value": [
+    {
+      "number": 1,
+      "weaponId": 1,
+      "enemyId": 1,
+      "enemyCount": 1,
+      "spawnCount": 1,
+      "spawnAtCenter": true
+    },
+    {
+      "number": 2,
+      "weaponId": 1,
+      "enemyId": 2,
+      "enemyCount": 15,
+      "spawnCount": 1,
+      "spawnAtCenter": false
+    },
+    {
+      "number": 3,
+      "weaponId": 2,
+      "enemyId": 3,
+      "enemyCount" : 30,
+      "spawnCount": 2,
+      "spawnAtCenter" : false
+    },
+    {
+      "number": 4,
+      "weaponId": 1,
+      "enemyCount": 7,
+      "spawnCount": 7,
+      "spawnAtCenter": true
+    }
+
+  ]
+}
