@@ -28,6 +28,17 @@ public class WeaponPresenter : IWeaponPresenter
         _view.SetSprite(_model.Sprite);
         _view.SetRotation(_model.Rotation);
         _lifeCycleManager.RegisterPresenter(this);
+
+        Transform projectileSpawnPosition = _view.GetProjectileSpawnPosition();
+
+        //Vector2 newPosition = new Vector2(projectile.transform.localPosition.x + model.Id * 10f, projectile.transform.localPosition.y);
+
+        //projectile.transform.localPosition = newPosition;
+
+        for (int i = 0; i < _model.Type.ProjectileSpawnCount; i++)
+        {
+            //IProjectilePresenter projectilePresenter = _projectileFactory.Create(i, projectileSpawnPosition,_model.Direction, _model.Type.ProjectileType);
+        }
     }
 
     public void Update(Vector2 updatableParameter)

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,7 +10,7 @@ public class GameInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<ICollection<IWeaponTypeModel>>().FromInstance(GetWeaponTypeModel());
+        //Container.Bind<ICollection<IWeaponTypeModel>>().FromInstance(GetWeaponTypeModel());
         Container.Bind<ICollection<ILevelModel>>().FromInstance(GetLevelModels());
 
         Container.Bind<IGameView>().FromInstance(_view).AsSingle();
@@ -19,21 +20,57 @@ public class GameInstaller : MonoInstaller
 
     private ICollection<ILevelModel> GetLevelModels()
     {
-        ICollection<ILevelModel> levelModels = new List<ILevelModel>();
+        List<IWeaponTypeModel> weaponTypeModels = GetWeaponTypeModels();
+        List<IEnemyTypeModel> enemyTypeModels = GetEnemyTypeModels();
+        List<ILevelModel> levelModels = new List<ILevelModel>();
 
         foreach (var levelData in JsonReaderService.ReadJsonInResources<ICollection<LevelData>>("Json/Levels"))
         {
-            ILevelModel levelModel = new LevelModel();
+            ILevelModel levelModel = new LevelModel(levelData.Number,_view.GetWeaponSpawnPosition().position, weaponTypeModels[levelData.WeaponId -1], enemyTypeModels[levelData.EnemyId], levelData.EnemyCount, levelData.SpawnAtCenter, levelData.SpawnCount);
+            levelModels.Add(levelModel);
         }
 
         return levelModels;
     }
-    private ICollection<IWeaponTypeModel> GetWeaponTypeModel()
+    private List<IWeaponTypeModel> GetWeaponTypeModels()
     {
-        ICollection<IWeaponTypeModel> weaponTypeModels = new List<IWeaponTypeModel>();
-        
+        Sprite[] weaponSpritesInAtlas = Resources.LoadAll<Sprite>("Images/Weapons");
+        List<IProjectileTypeModel> projectileTypeModels = GetProjectileTypeModels();
+        List<IWeaponTypeModel> weaponTypeModels = new List<IWeaponTypeModel>();
 
+        foreach (var weaponData in JsonReaderService.ReadJsonInResources<ICollection<WeaponData>>("Json/WeaponTypes"))
+        {
+            IWeaponTypeModel weaponTypeModel = new WeaponTypeModel(weaponData.Number, weaponData.Name, weaponData.ProjectileSpawnCount,weaponSpritesInAtlas[weaponData.SpriteNumber - 1], projectileTypeModels[weaponData.ProjectileNumber - 1]);
+            weaponTypeModels.Add(weaponTypeModel);
+        }
 
         return weaponTypeModels;
+    }
+
+    private List<IProjectileTypeModel> GetProjectileTypeModels()
+    {
+        Sprite[] projectileSpritesInAtlas = Resources.LoadAll<Sprite>("Images/Projectiles");
+        List<IProjectileTypeModel> projectileTypeModels = new List<IProjectileTypeModel>();
+
+        foreach (var projectileData in JsonReaderService.ReadJsonInResources<ICollection<ProjectileData>>("Json/ProjectileTypes"))
+        {
+            IProjectileTypeModel projectileTypeModel = new ProjectileTypeModel(projectileData.Number, projectileData.Name,projectileData.Speed, projectileSpritesInAtlas[projectileData.SpriteNumber - 1]);
+            projectileTypeModels.Add(projectileTypeModel);
+        }
+
+        return projectileTypeModels;
+    }
+    private List<IEnemyTypeModel> GetEnemyTypeModels()
+    {
+        Sprite[] enemiesSpritesInAtlas = Resources.LoadAll<Sprite>("Images/Enemies");
+        List<IEnemyTypeModel> enemyTypeModels = new List<IEnemyTypeModel>();
+
+        foreach (var enemyData in JsonReaderService.ReadJsonInResources<ICollection<EnemyData>>("Json/EnemyTypes"))
+        {
+            IEnemyTypeModel projectileTypeModel = new EnemyTypeModel(enemyData.Number, enemyData.Name, enemyData.Healts, enemyData.Speed, enemyData.IsStatic, enemyData.Points, enemiesSpritesInAtlas[enemyData.SpriteNumber - 1]);
+            enemyTypeModels.Add(projectileTypeModel);
+        }
+
+        return enemyTypeModels;
     }
 }

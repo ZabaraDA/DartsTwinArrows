@@ -12,11 +12,12 @@ public class WeaponLifeCycleManager : MonoBehaviour, IWeaponLifeCycleManager
 
     private void Update()
     {
-        Vector2 mouseScreenPosition = Input.mousePosition;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
         // Обновляем все активные презентеры
         for (int i = _activePresenters.Count - 1; i >= 0; i--)
         {
-            _activePresenters[i].Update(mouseScreenPosition);
+            _activePresenters[i].Update(mousePosition);
         }
     }
 

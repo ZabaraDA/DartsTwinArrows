@@ -5,25 +5,25 @@ public class WeaponFactory : IWeaponFactory
     private IWeaponLifeCycleManager _manager; // Ссылка на менеджер
     private IProjectileFactory _projectileFactory; // Ссылка на менеджер
 
-    public WeaponFactory(IWeaponLifeCycleManager manager)
+    public WeaponFactory(IWeaponLifeCycleManager manager, IProjectileFactory projectileFactory)
     {
         _manager = manager;
+        _projectileFactory = projectileFactory;
     }
 
     public IWeaponPresenter Create(IWeaponModel model)
     {
-        float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
-        Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        //float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
+        //Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Game Prefabs/Projectile");
-        GameObject projectile = Object.Instantiate(projectilePrefab, model.Position, quaternion);
+        GameObject weaponPrefab = Resources.Load<GameObject>("Prefabs/Weapon");
+        GameObject weapon = Object.Instantiate(weaponPrefab, model.Position, Quaternion.identity);
 
-        IWeaponView view = projectile.GetComponent<IWeaponView>(); // Убедитесь, что ProjectileView прикреплен к префабу
+        IWeaponView view = weapon.GetComponent<IWeaponView>();
 
         if (view == null)
         {
-            Debug.LogError("Префаб снаряда не содержит компонент ProjectileView или он не реализует IProjectileView!");
-            Object.Destroy(projectile);
+            Object.Destroy(weapon);
             return null;
         }
 
@@ -33,9 +33,9 @@ public class WeaponFactory : IWeaponFactory
 
         return presenter;
     }
-    public IWeaponPresenter Create(int id, string name, Vector2 position, Vector2 direction, IWeaponTypeModel type)
+    public IWeaponPresenter Create(int id, Vector2 position, IWeaponTypeModel type)
     {
-        IWeaponModel model = new WeaponModel(id, name, position, direction, type);
+        IWeaponModel model = new WeaponModel(id, position, type);
         return Create(model);
     }
 }

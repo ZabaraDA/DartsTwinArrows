@@ -10,7 +10,7 @@
     },
     {
       "number": 2,
-      "weaponId": 1,
+      "weaponId": 2,
       "enemyId": 2,
       "enemyCount": 15,
       "spawnCount": 1,

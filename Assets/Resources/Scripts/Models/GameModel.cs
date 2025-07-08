@@ -1,15 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameModel : IGameModel
 {
-    public ICollection<IWeaponTypeModel> WeaponTypeModels { get; set; }
     public ICollection<ILevelModel> LevelModels { get; set; }
 
-    public GameModel(ICollection<IWeaponTypeModel> weaponTypeModels, ICollection<ILevelModel> levelModels) 
-    {
-        WeaponTypeModels = weaponTypeModels;
-        LevelModels = levelModels;
+    private ILevelModel _currentLevelModel; 
+    public ILevelModel CurrentLevelModel 
+    { 
+        get
+        {
+            return _currentLevelModel;
+        }
+        set 
+        {
+            if (_currentLevelModel != value)
+            {
+                _currentLevelModel = value;
+                OnModelCurrentLevelModelChanged?.Invoke(_currentLevelModel);
+                Debug.Log($"Field '{nameof(CurrentLevelModel)}' changed in class {GetType()}. Value: {CurrentLevelModel}");
+            }
+        }
     }
+    public event Action<ILevelModel> OnModelCurrentLevelModelChanged;
+
+    public GameModel(ICollection<ILevelModel> levelModels) 
+    {
+        LevelModels = levelModels;
+
+        CurrentLevelModel = levelModels.FirstOrDefault(x => x.Number == 2);
+        Debug.Log("Levels Count: " + levelModels.Count);
+    }
+
 }

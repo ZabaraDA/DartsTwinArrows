@@ -9,12 +9,14 @@ public class ProjectileModel : IProjectileModel
     public IProjectileTypeModel ProjectileType { get; set; }
     public Sprite Sprite => ProjectileType.Sprite;
 
-    public ProjectileModel(int id, string name,  Vector2 position, Vector2 direction, IProjectileTypeModel type)
+    public Transform Parent { get; set; }
+
+    public ProjectileModel(int id, Transform parent, Vector2 direction, IProjectileTypeModel type)
     {
         Id = id;
-        Name = name;
         ProjectileType = type;
-        Position = position;
+        Parent = parent;
+        Position = parent.position;
         Direction = direction;
     }
 

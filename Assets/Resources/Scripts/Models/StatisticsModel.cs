@@ -13,7 +13,7 @@ public class StatisticsModel : IStatisticsModel
             {
                 _totalTime = value;
                 OnModelTotalTimeChanged?.Invoke(_totalTime);
-                Debug.Log($"Field '{nameof(TotalTime)}' changed in model");
+                //Debug.Log($"Field '{nameof(TotalTime)}' changed in model");
             }
         }
     }

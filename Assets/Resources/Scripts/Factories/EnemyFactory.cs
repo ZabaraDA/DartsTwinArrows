@@ -14,20 +14,20 @@ public class EnemyFactory : IEnemyFactory
         //float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
         //Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Game Prefabs/Projectile");
-        GameObject projectile = Object.Instantiate(projectilePrefab);
+        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Game Prefabs/Enemy");
+        GameObject enemy = Object.Instantiate(projectilePrefab);
 
-        IEnemyView view = projectile.GetComponent<IEnemyView>(); // Убедитесь, что ProjectileView прикреплен к префабу
+        IEnemyView view = enemy.GetComponent<IEnemyView>(); // Убедитесь, что ProjectileView прикреплен к префабу
 
         if (view == null)
         {
             Debug.LogError("Префаб снаряда не содержит компонент ProjectileView или он не реализует IProjectileView!");
-            Object.Destroy(projectile);
+            Object.Destroy(enemy);
             return null;
         }
 
         // 3. Создаем Presenter, передавая ему View и Model, и менеджер жизненного цикла
-        IEnemyPresenter presenter = new EnemyPresenter(view, model);
+        IEnemyPresenter presenter = new EnemyPresenter(view, model, _manager);
         presenter.Initialize(); // Инициализируем презентер
 
         return presenter;

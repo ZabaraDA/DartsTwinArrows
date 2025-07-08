@@ -4,6 +4,8 @@ public class ProjectileData
 {
     [JsonProperty("number")]
     public int Number;
+    [JsonProperty("name")]
+    public string Name;
     [JsonProperty("damage")]
     public int Damage;
     [JsonProperty("speed")]

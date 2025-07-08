@@ -15,9 +15,9 @@ public class ProjectilePresenter : IProjectilePresenter
 
     public void Initialize()
     {
+        Debug.Log("ProjectilePresenter start Initialize");
         _view.OnViewCollider2DTriggered += HandleOnViewCollider2DTriggered;
-        _view.SetPosition(_model.Position);
-
+        //_view.SetPosition(_model.Position);
         _view.SetSprite(_model.Sprite);
 
         _manager.RegisterPresenter(this);
@@ -28,10 +28,10 @@ public class ProjectilePresenter : IProjectilePresenter
         _model.UpdatePosition(deltaTime); // Обновляем позицию в модели
 
         // Обновляем позицию и поворот представления на основе модели
-        _view.SetPosition(_model.Position);
+        //_view.SetPosition(_model.Position);
         // Поворот снаряда должен постоянно совпадать с направлением его движения
-        float currentAngle = Mathf.Atan2(_model.Direction.y, _model.Direction.x) * Mathf.Rad2Deg;
-        _view.SetRotation(Quaternion.Euler(0, 0, currentAngle - 90));
+        //float currentAngle = Mathf.Atan2(_model.Direction.y, _model.Direction.x) * Mathf.Rad2Deg;
+        //_view.SetRotation(Quaternion.Euler(0, 0, currentAngle - 90));
     }
 
     private void DestroyEnemy()

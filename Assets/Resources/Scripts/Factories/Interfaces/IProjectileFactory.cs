@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IProjectileFactory : IFactory<IProjectilePresenter, IProjectileModel>
 {
-    IProjectilePresenter Create(int id, string name, Vector2 startPosition, Vector2 direction, IProjectileTypeModel projectileType);
+    IProjectilePresenter Create(int id, Transform parent, Vector2 direction, Vector2 position, IProjectileTypeModel projectileType);
 }

@@ -48,4 +48,19 @@ public class GameView : MonoBehaviour, IGameView
         _pausePanel.SetActive(isActive);
         _menuPanel.SetActive(!isActive);
     }
+
+    public void SetLevelText(string text)
+    {
+        _levelText.text = text;
+    }
+
+    public void SetScoreText(string text)
+    {
+        _scoreText.text = text;
+    }
+
+    public Transform GetWeaponSpawnPosition()
+    {
+        return _weaponSpawnPosition;
+    }
 }

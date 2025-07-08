@@ -4,6 +4,8 @@ public class EnemyData
 {
     [JsonProperty("number")]
     public int Number;
+    [JsonProperty("name")]
+    public string Name;
     [JsonProperty("healts")]
     public int Healts;
     [JsonProperty("speed")]

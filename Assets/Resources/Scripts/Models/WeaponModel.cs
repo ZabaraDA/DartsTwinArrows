@@ -4,7 +4,6 @@ using UnityEngine;
 public class WeaponModel : IWeaponModel
 {
     public int Id { get; set; }
-    public string Name { get; set; }
     public Vector2 Position { get; set; }
     public Vector2 Direction { get; set; }
     public IProjectileTypeModel ProjectileType => Type.ProjectileType;
@@ -41,12 +40,10 @@ public class WeaponModel : IWeaponModel
 
     public IWeaponTypeModel Type { get; set; }
 
-    public WeaponModel(int id, string name, Vector2 position, Vector2 direction, IWeaponTypeModel type)
+    public WeaponModel(int id, Vector2 position, IWeaponTypeModel type)
     {
         Id = id;
-        Name = name;
         Position = position;
-        Direction = direction;
         Type = type;
     }
 
@@ -55,6 +52,9 @@ public class WeaponModel : IWeaponModel
 
     public void UpdateRotation(Vector2 targetPosition)
     {
-        //ToDo
+        Debug.Log("targetPosition: " + targetPosition);
+        Vector2 direction = (Position - targetPosition);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
     }
 }

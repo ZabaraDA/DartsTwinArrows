@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ProjectileFactory : IProjectileFactory
 {
@@ -11,32 +12,33 @@ public class ProjectileFactory : IProjectileFactory
 
     public IProjectilePresenter Create(IProjectileModel model)
     {
-        float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
-        Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        //float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
+        //Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Game Prefabs/Projectile");
-        GameObject projectile = Object.Instantiate(projectilePrefab, model.Position, quaternion);
+        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Projectile");
+        GameObject projectile = Object.Instantiate(projectilePrefab, model.Parent);
+        //GameObject projectile = Object.Instantiate(projectilePrefab);
 
+        //Vector2 newPosition = new Vector2(projectile.transform.localPosition.x + model.Id * 10f, projectile.transform.localPosition.y);
 
+        //projectile.transform.localPosition = newPosition;
 
-        IProjectileView view = projectile.GetComponent<IProjectileView>(); // Убедитесь, что ProjectileView прикреплен к префабу
-
-        if (view == null)
+        
+        if (!projectile.TryGetComponent<IProjectileView>(out var view))
         {
-            Debug.LogError("Префаб снаряда не содержит компонент ProjectileView или он не реализует IProjectileView!");
             Object.Destroy(projectile);
             return null;
         }
 
-        // 3. Создаем Presenter, передавая ему View и Model, и менеджер жизненного цикла
         IProjectilePresenter presenter = new ProjectilePresenter(view, model, _manager);
-        presenter.Initialize(); // Инициализируем презентер
+        presenter.Initialize();
 
         return presenter;
     }
-    public IProjectilePresenter Create(int id, string name, Vector2 position, Vector2 direction, IProjectileTypeModel projectileType)
+
+    public IProjectilePresenter Create(int id, Transform parent, Vector2 direction, Vector2 position, IProjectileTypeModel projectileType)
     {
-        IProjectileModel model = new ProjectileModel(id, name, position, direction, projectileType);
+        IProjectileModel model = new ProjectileModel(id, parent, direction, projectileType);
         return Create(model);
     }
 }

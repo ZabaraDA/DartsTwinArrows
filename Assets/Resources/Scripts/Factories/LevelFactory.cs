@@ -2,28 +2,30 @@ using UnityEngine;
 
 public class LevelFactory : ILevelFactory
 {
+    private IEnemyFactory _enemyFactory;
+    private IWeaponFactory _weaponFactory;
+
+    public LevelFactory(IEnemyFactory enemyFactory, IWeaponFactory weaponFactory)
+    {
+        _enemyFactory = enemyFactory;
+        _weaponFactory = weaponFactory;
+    }
+
     public ILevelPresenter Create(ILevelModel model)
     {
+        GameObject levelPrefab = Resources.Load<GameObject>("Prefabs/Level");
+        GameObject level = Object.Instantiate(levelPrefab);
 
-        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Game Prefabs/Level");
-        GameObject projectile = Object.Instantiate(projectilePrefab);
-
-        ILevelView view = projectile.GetComponent<ILevelView>();
-
-        if (view == null)
+        
+        if (!level.TryGetComponent<ILevelView>(out var view))
         {
-            Object.Destroy(projectile);
+            Object.Destroy(level);
             return null;
         }
 
-        ILevelPresenter presenter = new LevelPresenter(view, model);
+        ILevelPresenter presenter = new LevelPresenter(view, model, _weaponFactory, _enemyFactory);
         presenter.Initialize();
 
         return presenter;
     }
-    //public ILevelPresenter Create(int id, string name, Vector2 position, Vector2 direction, IProjectileTypeModel projectileType)
-    //{
-    //    IProjectileModel model = new ProjectileModel(id, name, position, direction, projectileType);
-    //    return Create(model);
-    //}
 }

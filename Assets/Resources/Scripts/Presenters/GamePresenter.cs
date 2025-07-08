@@ -19,13 +19,35 @@ public class GamePresenter : IGamePresenter
     {
         _view.OnViewPauseButtonClicked -= HandleOnViewPauseButtonClicked;
         _view.OnViewContinueButtonClicked -= HandleOnViewContinueButtonClicked;
+
+        _model.OnModelCurrentLevelModelChanged += HandleOnModelCurrentLevelModelChanged;
     }
     public void Initialize()
     {
         _view.OnViewPauseButtonClicked += HandleOnViewPauseButtonClicked;
         _view.OnViewContinueButtonClicked += HandleOnViewContinueButtonClicked;
         _statisticsPresenter.Initialize();
+
+        LoadLevel(_model.CurrentLevelModel);
         Debug.Log("GamePresenter inizialized");
+    }
+
+    private void HandleOnModelCurrentLevelModelChanged(ILevelModel levelModel)
+    {
+        LoadLevel(levelModel);
+    }
+    private void LoadLevel(ILevelModel levelModel)
+    {
+        ILevelPresenter levelPresenter = _levelFactory.Create(levelModel);
+        levelPresenter.OnPresenterLevelCompletedTriggered += HandleOnPresenterLevelCompletedTriggered;
+
+        _view.SetLevelText($"LEVEL {levelModel.Number}");
+    }
+
+    private void HandleOnPresenterLevelCompletedTriggered(ILevelPresenter levelPresenter)
+    {
+        levelPresenter.OnPresenterLevelCompletedTriggered -= HandleOnPresenterLevelCompletedTriggered;
+
     }
 
     private void HandleOnViewPauseButtonClicked()

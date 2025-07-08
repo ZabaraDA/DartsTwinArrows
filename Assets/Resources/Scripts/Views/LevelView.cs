@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LevelView : ILevelView
+public class LevelView : MonoBehaviour, ILevelView
 {
     
 }

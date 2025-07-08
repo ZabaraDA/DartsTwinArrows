@@ -6,4 +6,5 @@ public interface IWeaponTypeModel
     string Name { get; set; }
     Sprite Sprite { get; set; }
     IProjectileTypeModel ProjectileType { get; set; }
+    int ProjectileSpawnCount { get; set; }
 }

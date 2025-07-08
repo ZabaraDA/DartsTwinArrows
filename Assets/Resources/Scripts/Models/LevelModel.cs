@@ -3,9 +3,22 @@ using UnityEngine;
 
 public class LevelModel : ILevelModel
 {
-    public int Number { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public IWeaponTypeModel WeaponTypeModel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public int EnemyCount { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public bool SpawnAtCenter { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public int SpawnCount { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int Number { get; set; }
+    public IWeaponTypeModel WeaponType { get; set; }
+    public int EnemyCount { get; set; }
+    public bool SpawnAtCenter { get; set; }
+    public int SpawnCount { get; set; }
+    public IEnemyTypeModel EnemyType { get; set; }
+    public Vector2 WeaponSpawnPosition { get; set; }
+
+    public LevelModel(int number, Vector2 weaponSpawnPosition, IWeaponTypeModel weaponType, IEnemyTypeModel enemyType, int enemyCount, bool spawnAtCenter, int spawnCount)
+    {
+        Number = number;
+        WeaponSpawnPosition = weaponSpawnPosition;
+        WeaponType = weaponType;
+        EnemyCount = enemyCount;
+        SpawnAtCenter = spawnAtCenter;
+        SpawnCount = spawnCount;
+        EnemyType = enemyType;
+    }
 }
