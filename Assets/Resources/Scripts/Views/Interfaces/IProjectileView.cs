@@ -6,6 +6,7 @@ public interface IProjectileView
     void SetPosition(Vector2 newPosition);
     void SetRotation(Quaternion newRotation);
     void SetSprite(Sprite sprite);
+    void DetachFromParent();
 
     GameObject GetGameObject();
 

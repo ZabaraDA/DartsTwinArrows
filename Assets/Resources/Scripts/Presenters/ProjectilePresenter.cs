@@ -17,6 +17,7 @@ public class ProjectilePresenter : IProjectilePresenter
     {
         Debug.Log("ProjectilePresenter start Initialize");
         _view.OnViewCollider2DTriggered += HandleOnViewCollider2DTriggered;
+        _model.OnModelPositionChanged += HandleOnModelPositionChanged;
         //_view.SetPosition(_model.Position);
         _view.SetSprite(_model.Sprite);
 
@@ -25,7 +26,10 @@ public class ProjectilePresenter : IProjectilePresenter
 
     public void Update(float deltaTime)
     {
-        _model.UpdatePosition(deltaTime); // Обновляем позицию в модели
+        if (_model.IsMoving)
+        {
+            _model.UpdatePosition(deltaTime); // Обновляем позицию в модели
+        }
 
         // Обновляем позицию и поворот представления на основе модели
         //_view.SetPosition(_model.Position);
@@ -34,15 +38,13 @@ public class ProjectilePresenter : IProjectilePresenter
         //_view.SetRotation(Quaternion.Euler(0, 0, currentAngle - 90));
     }
 
-    private void DestroyEnemy()
+    
+
+    private void HandleOnModelPositionChanged(Vector2 vector)
     {
-        _view.OnViewCollider2DTriggered -= HandleOnViewCollider2DTriggered;
-        _manager.UnregisterPresenter(this);
-        if (_view.GetGameObject() != null)
-        {
-            MonoBehaviour.Destroy(_view.GetGameObject());
-        }
+        _view.SetPosition(vector);
     }
+
     private void HandleOnViewCollider2DTriggered(Collider2D other)
     {
         //if (other.CompareTag("Enemy"))
@@ -57,6 +59,21 @@ public class ProjectilePresenter : IProjectilePresenter
 
     public void Dispose()
     {
-        DestroyEnemy();
+        _view.OnViewCollider2DTriggered -= HandleOnViewCollider2DTriggered;
+        _model.OnModelPositionChanged -= HandleOnModelPositionChanged;
+        _manager.UnregisterPresenter(this);
+        if (_view as UnityEngine.Object != null)
+        {
+            MonoBehaviour.Destroy(_view.GetGameObject());
+        }
+    }
+
+    public void StartMoving()
+    {
+        if (!_model.IsMoving)
+        {
+            _view.DetachFromParent();
+            _model.IsMoving = true;
+        }
     }
 }

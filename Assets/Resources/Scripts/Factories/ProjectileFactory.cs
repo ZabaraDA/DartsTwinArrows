@@ -16,7 +16,7 @@ public class ProjectileFactory : IProjectileFactory
         //Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
         GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Projectile");
-        GameObject projectile = Object.Instantiate(projectilePrefab, model.Parent);
+        GameObject projectile = Object.Instantiate(projectilePrefab, model.Position, Quaternion.identity, model.Parent);
         //GameObject projectile = Object.Instantiate(projectilePrefab);
 
         //Vector2 newPosition = new Vector2(projectile.transform.localPosition.x + model.Id * 10f, projectile.transform.localPosition.y);
@@ -38,7 +38,7 @@ public class ProjectileFactory : IProjectileFactory
 
     public IProjectilePresenter Create(int id, Transform parent, Vector2 direction, Vector2 position, IProjectileTypeModel projectileType)
     {
-        IProjectileModel model = new ProjectileModel(id, parent, direction, projectileType);
+        IProjectileModel model = new ProjectileModel(id, parent, direction, position, projectileType);
         return Create(model);
     }
 }

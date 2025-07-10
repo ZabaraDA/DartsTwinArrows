@@ -5,14 +5,16 @@
       "name": "Hand",
       "projectileSpawnCount": 1,
       "spriteNumber": 1,
-      "projectileNumber": 1
+      "projectileNumber": 1,
+      "projectileLaunchDelay" : 1
     },
     {
       "number": 2,
       "name": "Crossbow",
       "projectileSpawnCount": 2,
       "spriteNumber": 2,
-      "projectileNumber": 2
+      "projectileNumber": 2,
+      "projectileLaunchDelay" : 2
     }
   ]
 }

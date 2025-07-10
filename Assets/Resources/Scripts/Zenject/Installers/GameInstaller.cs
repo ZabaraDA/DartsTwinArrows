@@ -40,7 +40,7 @@ public class GameInstaller : MonoInstaller
 
         foreach (var weaponData in JsonReaderService.ReadJsonInResources<ICollection<WeaponData>>("Json/WeaponTypes"))
         {
-            IWeaponTypeModel weaponTypeModel = new WeaponTypeModel(weaponData.Number, weaponData.Name, weaponData.ProjectileSpawnCount,weaponSpritesInAtlas[weaponData.SpriteNumber - 1], projectileTypeModels[weaponData.ProjectileNumber - 1]);
+            IWeaponTypeModel weaponTypeModel = new WeaponTypeModel(weaponData.Number, weaponData.Name, weaponData.ProjectileSpawnCount, weaponData.ProjectileLaunchDelay, weaponSpritesInAtlas[weaponData.SpriteNumber - 1], projectileTypeModels[weaponData.ProjectileNumber - 1]);
             weaponTypeModels.Add(weaponTypeModel);
         }
 

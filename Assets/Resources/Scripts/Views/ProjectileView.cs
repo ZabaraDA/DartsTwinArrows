@@ -32,4 +32,9 @@ public class ProjectileView : MonoBehaviour, IProjectileView
     {
         _spriteRenderer.sprite = sprite;
     }
+
+    public void DetachFromParent()
+    {
+        transform.SetParent(null, true);
+    }
 }

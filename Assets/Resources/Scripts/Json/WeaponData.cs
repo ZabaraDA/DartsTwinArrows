@@ -12,4 +12,7 @@ public class WeaponData
     public int ProjectileNumber;
     [JsonProperty("spriteNumber")]
     public int SpriteNumber;
+    [JsonProperty("projectileLaunchDelay")]
+    public float ProjectileLaunchDelay;
+
 }

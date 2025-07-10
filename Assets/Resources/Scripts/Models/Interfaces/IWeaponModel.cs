@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IWeaponModel
 {
     int Id { get; set; }
+    float ProjectileLaunchDelay { get; set; }
     Vector2 Position { get; set; }
     Vector2 Direction { get; set; }
     Quaternion Rotation { get; set; }
