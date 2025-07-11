@@ -10,10 +10,10 @@ namespace Zenject.SpaceFighter
         readonly Settings _settings;
         readonly Explosion.Factory _explosionFactory;
         readonly AudioPlayer _audioPlayer;
-        readonly EnemyView _view;
+        readonly EnemyView1 _view;
 
         public EnemyDeathHandler(
-            EnemyView view,
+            EnemyView1 view,
             AudioPlayer audioPlayer,
             Explosion.Factory explosionFactory,
             Settings settings,

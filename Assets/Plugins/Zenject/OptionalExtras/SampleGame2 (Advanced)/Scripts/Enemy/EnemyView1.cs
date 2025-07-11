@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Zenject.SpaceFighter
 {
-    public class EnemyView : MonoBehaviour
+    public class EnemyView1 : MonoBehaviour
     {
         [SerializeField]
         MeshRenderer _renderer = null;

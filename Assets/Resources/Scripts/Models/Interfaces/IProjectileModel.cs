@@ -10,7 +10,7 @@ public interface IProjectileModel
     Vector2 Position { get; set; }
     Vector2 Direction { get; set; }
     Transform Parent { get; set; }
-    IProjectileTypeModel ProjectileType { get; set; }
+    IProjectileTypeModel Type { get; set; }
 
     public event Action<Vector2> OnModelPositionChanged;
 

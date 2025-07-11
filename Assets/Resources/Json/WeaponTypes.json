@@ -6,7 +6,7 @@
       "projectileSpawnCount": 1,
       "spriteNumber": 1,
       "projectileNumber": 1,
-      "projectileLaunchDelay" : 1
+      "projectileLaunchDelay" : 0.5
     },
     {
       "number": 2,
@@ -14,7 +14,7 @@
       "projectileSpawnCount": 2,
       "spriteNumber": 2,
       "projectileNumber": 2,
-      "projectileLaunchDelay" : 2
+      "projectileLaunchDelay" : 0.5
     }
   ]
 }

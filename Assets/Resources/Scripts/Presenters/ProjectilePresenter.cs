@@ -15,10 +15,9 @@ public class ProjectilePresenter : IProjectilePresenter
 
     public void Initialize()
     {
-        Debug.Log("ProjectilePresenter start Initialize");
         _view.OnViewCollider2DTriggered += HandleOnViewCollider2DTriggered;
         _model.OnModelPositionChanged += HandleOnModelPositionChanged;
-        //_view.SetPosition(_model.Position);
+        
         _view.SetSprite(_model.Sprite);
 
         _manager.RegisterPresenter(this);
@@ -30,15 +29,9 @@ public class ProjectilePresenter : IProjectilePresenter
         {
             _model.UpdatePosition(deltaTime); // Обновляем позицию в модели
         }
-
-        // Обновляем позицию и поворот представления на основе модели
-        //_view.SetPosition(_model.Position);
-        // Поворот снаряда должен постоянно совпадать с направлением его движения
-        //float currentAngle = Mathf.Atan2(_model.Direction.y, _model.Direction.x) * Mathf.Rad2Deg;
-        //_view.SetRotation(Quaternion.Euler(0, 0, currentAngle - 90));
     }
 
-    
+
 
     private void HandleOnModelPositionChanged(Vector2 vector)
     {
@@ -47,14 +40,15 @@ public class ProjectilePresenter : IProjectilePresenter
 
     private void HandleOnViewCollider2DTriggered(Collider2D other)
     {
-        //if (other.CompareTag("Enemy"))
-        //{
-        //    if (other.TryGetComponent<IEnemyView>(out var enemy))
-        //    {
-        //        enemy.TakeDamage(_model.Type.Damage);
-        //    }
-        //    DestroyEnemy();
-        //}
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("PROJECTILE TRIGGERED ENEMY");
+            if (other.TryGetComponent<IEnemyView>(out var enemy))
+            {
+                enemy.TakeDamage(_model.Type.Damage);
+            }
+            Dispose();
+        }
     }
 
     public void Dispose()
@@ -62,7 +56,7 @@ public class ProjectilePresenter : IProjectilePresenter
         _view.OnViewCollider2DTriggered -= HandleOnViewCollider2DTriggered;
         _model.OnModelPositionChanged -= HandleOnModelPositionChanged;
         _manager.UnregisterPresenter(this);
-        if (_view as UnityEngine.Object != null)
+        if (_view as MonoBehaviour != null)
         {
             MonoBehaviour.Destroy(_view.GetGameObject());
         }
@@ -74,6 +68,7 @@ public class ProjectilePresenter : IProjectilePresenter
         {
             _view.DetachFromParent();
             _model.IsMoving = true;
+            _model.Direction = _view.GetGameObject().transform.up;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Zenject.SpaceFighter
         readonly Settings _settings;
         readonly EnemyTunables _tunables;
         readonly EnemyStateManager _stateManager;
-        readonly EnemyView _view;
+        readonly EnemyView1 _view;
         readonly PlayerFacade _player;
 
         bool _strafeRight;
@@ -19,7 +19,7 @@ namespace Zenject.SpaceFighter
 
         public EnemyStateFollow(
             PlayerFacade player,
-            EnemyView view,
+            EnemyView1 view,
             EnemyStateManager stateManager,
             EnemyTunables tunables,
             Settings settings,

@@ -13,7 +13,7 @@ namespace Zenject.SpaceFighter
         readonly EnemyStateManager _stateManager;
         readonly PlayerFacade _player;
         readonly Settings _settings;
-        readonly EnemyView _view;
+        readonly EnemyView1 _view;
         readonly Bullet.Factory _bulletFactory;
 
         float _lastShootTime;
@@ -22,7 +22,7 @@ namespace Zenject.SpaceFighter
 
         public EnemyStateAttack(
             Bullet.Factory bulletFactory,
-            EnemyView view,
+            EnemyView1 view,
             Settings settings,
             PlayerFacade player,
             EnemyStateManager stateManager,

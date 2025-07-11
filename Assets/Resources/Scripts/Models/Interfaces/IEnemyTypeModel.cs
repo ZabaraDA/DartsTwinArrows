@@ -9,5 +9,6 @@ public interface IEnemyTypeModel
     int Speed { get; set; }
     bool IsStatic { get; set; }
     int Points { get; set; }
+    int SizeMultiplier { get; set; }
     Sprite Sprite { get; set; }
 }

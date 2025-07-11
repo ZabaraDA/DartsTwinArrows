@@ -4,7 +4,8 @@ using UnityEngine;
 public interface IWeaponModel
 {
     int Id { get; set; }
-    float ProjectileLaunchDelay { get; set; }
+    float ProjectileLaunchDelay { get; }
+    float NextFireTime { get; set; }
     Vector2 Position { get; set; }
     Vector2 Direction { get; set; }
     Quaternion Rotation { get; set; }
@@ -16,4 +17,6 @@ public interface IWeaponModel
     event Action<Sprite> OnModelSpriteChanged;
 
     void UpdateRotation(Vector2 target);
+    bool CanFire();
+    void SetLastFireTime(float currentTime);
 }

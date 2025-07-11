@@ -29,14 +29,14 @@ namespace Zenject.SpaceFighter
     {
         IEnemyState _currentStateHandler;
         EnemyStates _currentState = EnemyStates.None;
-        EnemyView _view;
+        EnemyView1 _view;
 
         List<IEnemyState> _states;
 
         // We can't use a constructor due to a circular dependency issue
         [Inject]
         public void Construct(
-            EnemyView view,
+            EnemyView1 view,
             EnemyStateIdle idle, EnemyStateAttack attack, EnemyStateFollow follow)
         {
             _view = view;

@@ -3,19 +3,23 @@
     {
       "number": 1,
       "name": "Dartboard",
-      "healts": 15,
+      "healts": 1,
       "speed": 0,
-      "isStatic" : true,
+      "damage": 1,
+      "isStatic": true,
       "points": 150,
-      "spriteNumber" : 1
+      "sizeMultiplier": 3,
+      "spriteNumber": 1
     },
     {
       "number": 2,
       "name": "Ballon",
       "healts": 1,
       "speed": 100,
+      "damage": 1,
       "isStatic": false,
       "points": 1,
+      "sizeMultiplier": 1,
       "spriteNumber": 2
     },
     {
@@ -23,8 +27,10 @@
       "name": "Glowing ball",
       "healts": 1,
       "speed": 200,
+      "damage": 1,
       "isStatic": false,
       "points": 1,
+      "sizeMultiplier": 1,
       "spriteNumber": 3
     },
     {
@@ -32,8 +38,10 @@
       "name": "Card",
       "healts": 1,
       "speed": 0,
+      "damage": 1,
       "isStatic": true,
       "points": 1,
+      "sizeMultiplier": 1,
       "spriteNumber": 4
     }
   ]

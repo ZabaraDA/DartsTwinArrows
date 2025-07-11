@@ -9,8 +9,9 @@ public class EnemyTypeModel : IEnemyTypeModel
     public bool IsStatic { get; set; }
     public int Points { get; set; }
     public Sprite Sprite { get; set; }
+    public int SizeMultiplier { get; set; }
 
-    public EnemyTypeModel(int number, string name, int healts, int speed, bool isStatic, int points, Sprite sprite)
+    public EnemyTypeModel(int number, string name, int healts, int speed, bool isStatic, int points, Sprite sprite, int sizeMultiplier)
     {
         Number = number;
         Name = name;
@@ -19,5 +20,6 @@ public class EnemyTypeModel : IEnemyTypeModel
         IsStatic = isStatic;
         Points = points;
         Sprite = sprite;
+        SizeMultiplier = sizeMultiplier;
     }
 }

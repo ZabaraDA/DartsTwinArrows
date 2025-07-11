@@ -8,14 +8,14 @@ namespace Zenject.SpaceFighter
     {
         readonly EnemyRotationHandler _rotationHandler;
         readonly Settings _settings;
-        readonly EnemyView _view;
+        readonly EnemyView1 _view;
 
         Vector3 _startPos;
         float _theta;
         Vector3 _startLookDir;
 
         public EnemyStateIdle(
-            EnemyView view, Settings settings,
+            EnemyView1 view, Settings settings,
             EnemyRotationHandler rotationHandler)
         {
             _rotationHandler = rotationHandler;

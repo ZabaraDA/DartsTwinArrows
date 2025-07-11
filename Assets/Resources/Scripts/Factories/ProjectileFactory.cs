@@ -12,17 +12,11 @@ public class ProjectileFactory : IProjectileFactory
 
     public IProjectilePresenter Create(IProjectileModel model)
     {
-        //float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
-        //Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-
         GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Projectile");
-        GameObject projectile = Object.Instantiate(projectilePrefab, model.Position, Quaternion.identity, model.Parent);
+        GameObject projectile = Object.Instantiate(projectilePrefab, model.Position, model.Parent.rotation, model.Parent);
         //GameObject projectile = Object.Instantiate(projectilePrefab);
 
-        //Vector2 newPosition = new Vector2(projectile.transform.localPosition.x + model.Id * 10f, projectile.transform.localPosition.y);
-
-        //projectile.transform.localPosition = newPosition;
-
+        projectile.transform.localPosition = new Vector2(projectile.transform.localPosition.x, 0);
         
         if (!projectile.TryGetComponent<IProjectileView>(out var view))
         {
@@ -36,9 +30,9 @@ public class ProjectileFactory : IProjectileFactory
         return presenter;
     }
 
-    public IProjectilePresenter Create(int id, Transform parent, Vector2 direction, Vector2 position, IProjectileTypeModel projectileType)
+    public IProjectilePresenter Create(int id, Transform parent, Vector2 position, IProjectileTypeModel projectileType)
     {
-        IProjectileModel model = new ProjectileModel(id, parent, direction, position, projectileType);
+        IProjectileModel model = new ProjectileModel(id, parent, position, projectileType);
         return Create(model);
     }
 }

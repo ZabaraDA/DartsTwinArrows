@@ -7,7 +7,7 @@ public interface IEnemyModel
     int CurrentHealts { get; set; }
     IEnemyTypeModel Type { get; set; }
     Vector2 Position { get; set; }
-    Vector2 TargetPosition { get; set; }
+    //Vector2 TargetPosition { get; set; }
 
     event Action<int> OnModelHealtsChanged;
 

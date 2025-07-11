@@ -9,10 +9,10 @@ namespace Zenject.SpaceFighter
     public class EnemyRotationHandler : IFixedTickable
     {
         readonly Settings _settings;
-        readonly EnemyView _view;
+        readonly EnemyView1 _view;
 
         public EnemyRotationHandler(
-            EnemyView view,
+            EnemyView1 view,
             Settings settings)
         {
             _settings = settings;

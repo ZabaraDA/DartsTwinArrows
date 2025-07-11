@@ -14,6 +14,9 @@ public class EnemyData
     public bool IsStatic;
     [JsonProperty("points")]
     public int Points;
+    [JsonProperty("sizeMultiplier")]
+    public int SizeMultiplier;
     [JsonProperty("spriteNumber")]
     public int SpriteNumber;
+    
 }

@@ -30,7 +30,7 @@ public class GameModel : IGameModel
     {
         LevelModels = levelModels;
 
-        CurrentLevelModel = levelModels.FirstOrDefault(x => x.Number == 2);
+        CurrentLevelModel = levelModels.FirstOrDefault(x => x.Number == 1);
         Debug.Log("Levels Count: " + levelModels.Count);
     }
 

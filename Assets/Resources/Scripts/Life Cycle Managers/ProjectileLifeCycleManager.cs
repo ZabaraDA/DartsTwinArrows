@@ -21,7 +21,6 @@ public class ProjectileLifeCycleManager : MonoBehaviour, IProjectileLifeCycleMan
 
     public void RegisterPresenter(IProjectilePresenter presenter)
     {
-        Debug.Log("ProjectileLifeCycleManager");
         if (!_activePresenters.Contains(presenter))
         {
             _activePresenters.Add(presenter);

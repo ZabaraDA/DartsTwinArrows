@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponPresenter : IWeaponPresenter
@@ -22,6 +23,9 @@ public class WeaponPresenter : IWeaponPresenter
     {
         _model.OnModelRotationChanged -= HandleOnModelRotationChanged;
         _model.OnModelSpriteChanged -= HandleOnModelSpriteChanged;
+
+        _view.OnViewMouseButtonClick -= HandleOnViewMouseButtonClick;
+
         _lifeCycleManager.UnregisterPresenter(this);
     }
 
@@ -34,26 +38,22 @@ public class WeaponPresenter : IWeaponPresenter
 
         _view.SetSprite(_model.Sprite);
         _view.SetRotation(_model.Rotation);
+
         _lifeCycleManager.RegisterPresenter(this);
 
-        _view.StartWeaponCoroutine(PrepareProjectile());
-
-        
     }
 
     public void Update(Vector2 updatableParameter)
     {
         _model.UpdateRotation(updatableParameter);
+        if (_model.CanFire() && !_waitingProjectiles.Any())
+        {
+            PrepareProjectile();
+        }
     }
-
     private void HandleOnViewMouseButtonClick()
     {
         LaunchProjectile();
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-
-        Debug.Log("PlayerView position: " + mousePosition);
-
     }
 
     private void HandleOnModelSpriteChanged(Sprite sprite)
@@ -65,7 +65,7 @@ public class WeaponPresenter : IWeaponPresenter
         _view.SetRotation(rotation);
     }
 
-    public IEnumerator PrepareProjectile()
+    public void PrepareProjectile()
     {
         Transform projectileSpawnPosition = _view.GetProjectileSpawnPosition();
 
@@ -83,23 +83,23 @@ public class WeaponPresenter : IWeaponPresenter
                     newPosition.x += i * 20f;
                 }
             }
-            IProjectilePresenter projectilePresenter = _projectileFactory.Create(i, projectileSpawnPosition, new Vector2(0f, 1f), newPosition, _model.Type.ProjectileType);
+            IProjectilePresenter projectilePresenter = _projectileFactory.Create(i, projectileSpawnPosition, newPosition, _model.Type.ProjectileType);
             _waitingProjectiles.Add(projectilePresenter);
         }
-        yield return new WaitForSeconds(_model.ProjectileLaunchDelay);
     }
 
     public void LaunchProjectile()
     {
-        //for (int i = _waitingProjectiles.Count - 1; i >= 0; i--) // Идем в обратном порядке для безопасного удаления
-        //{
-        //    _waitingProjectiles[i].StartMoving();
-        //}
+        if (!_waitingProjectiles.Any())
+        {
+            return;
+        }
+
         foreach (var projectilePresenter in _waitingProjectiles)
         {
             projectilePresenter.StartMoving();
         }
         _waitingProjectiles.Clear();
-        _view.StartWeaponCoroutine(PrepareProjectile());
+        _model.SetLastFireTime(Time.time);
     }
 }

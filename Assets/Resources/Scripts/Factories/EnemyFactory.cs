@@ -11,30 +11,29 @@ public class EnemyFactory : IEnemyFactory
 
     public IEnemyPresenter Create(IEnemyModel model)
     {
-        //float angle = Mathf.Atan2(model.Direction.y, model.Direction.x) * Mathf.Rad2Deg;
-        //Quaternion quaternion = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Game Prefabs/Enemy");
-        GameObject enemy = Object.Instantiate(projectilePrefab);
+        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Enemy");
+        GameObject enemy = Object.Instantiate(projectilePrefab, model.Position, Quaternion.identity);
 
-        IEnemyView view = enemy.GetComponent<IEnemyView>(); // Убедитесь, что ProjectileView прикреплен к префабу
+        Debug.Log(enemy.transform.localScale.ToString());
+        Debug.Log("SizeMultiplier: " + model.Type.SizeMultiplier.ToString());
+        enemy.transform.localScale = enemy.transform.localScale * model.Type.SizeMultiplier;
 
-        if (view == null)
+        if (!enemy.TryGetComponent<IEnemyView>(out var view))
         {
-            Debug.LogError("Префаб снаряда не содержит компонент ProjectileView или он не реализует IProjectileView!");
             Object.Destroy(enemy);
             return null;
         }
 
-        // 3. Создаем Presenter, передавая ему View и Model, и менеджер жизненного цикла
         IEnemyPresenter presenter = new EnemyPresenter(view, model, _manager);
         presenter.Initialize(); // Инициализируем презентер
 
         return presenter;
     }
-    //public IEnemyPresenter Create(int id, string name, Vector2 position, Vector2 direction, IProjectileTypeModel projectileType)
-    //{
-    //    IEnemyModel model = new EnemyModel(id, name, position, direction, projectileType);
-    //    return Create(model);
-    //}
+
+    public IEnemyPresenter Create(int id, IEnemyTypeModel projectileType, Vector2 position)
+    {
+        IEnemyModel model = new EnemyModel(id, projectileType, position);
+        return Create(model);
+    }
 }

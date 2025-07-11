@@ -26,14 +26,21 @@ public class LevelPresenter : ILevelPresenter
 
     private void SpawnWeapon()
     {
-        //IWeaponModel model = new WeaponModel(1, _model.WeaponSpawnPosition, _model.WeaponType);
-        //IWeaponPresenter weaponPresenter = _weaponFactory.Create(model);
         IWeaponPresenter weaponPresenter = _weaponFactory.Create(1, _model.WeaponSpawnPosition, _model.WeaponType);
+    }
+    private void SpawnEnemies()
+    {
+        Vector2 spawnPosition = new Vector2();
+        for (int i = 0; i < _model.SpawnCount; i++)
+        {
+            IEnemyPresenter enemyPresenter = _enemyFactory.Create(i,_model.EnemyType, spawnPosition);
+        }
     }
 
     public void Initialize()
     {
         SpawnWeapon();
+        SpawnEnemies();
         Debug.Log($"LevelPresenter {_model.Number} inizialized");
     }
 }
