@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject.SpaceFighter;
 
@@ -6,6 +7,9 @@ public class ProjectilePresenter : IProjectilePresenter
     private IProjectileView _view;
     private IProjectileModel _model;
     private IProjectileLifeCycleManager _manager;
+
+    public event Action<IProjectilePresenter> OnPresenterDestroyProjectileTriggered;
+
     public ProjectilePresenter(IProjectileView view, IProjectileModel model, IProjectileLifeCycleManager manager)
     {
         _model = model;
@@ -42,7 +46,6 @@ public class ProjectilePresenter : IProjectilePresenter
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("PROJECTILE TRIGGERED ENEMY");
             if (other.TryGetComponent<IEnemyView>(out var enemy))
             {
                 enemy.TakeDamage(_model.Type.Damage);
@@ -53,6 +56,7 @@ public class ProjectilePresenter : IProjectilePresenter
 
     public void Dispose()
     {
+        OnPresenterDestroyProjectileTriggered?.Invoke(this);
         _view.OnViewCollider2DTriggered -= HandleOnViewCollider2DTriggered;
         _model.OnModelPositionChanged -= HandleOnModelPositionChanged;
         _manager.UnregisterPresenter(this);

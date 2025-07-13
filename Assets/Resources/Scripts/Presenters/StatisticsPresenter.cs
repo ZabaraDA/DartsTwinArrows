@@ -50,11 +50,29 @@ public class StatisticsPresenter : IStatisticsPresenter
 
     public void Update(float updatableParameter)
     {
-        _model.AddTime(updatableParameter);
+        if (_model.IsActive)
+        {
+            _model.AddTime(updatableParameter);
+        }
     }
 
     public void ChangeVisibilityStatisticsPanel(bool isVisible)
     {
         _view.SetActive(isVisible);
+    }
+
+    public void StopTimer()
+    {
+        _model.IsActive = false;
+    }
+
+    public void AddPoints(int points)
+    {
+        _model.AddPoints(points);
+    }
+
+    public void AddTotalPoints(int points)
+    {
+        _model.AddTotalPoints(points);
     }
 }

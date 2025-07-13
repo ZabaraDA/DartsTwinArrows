@@ -27,6 +27,11 @@ public class WeaponPresenter : IWeaponPresenter
         _view.OnViewMouseButtonClick -= HandleOnViewMouseButtonClick;
 
         _lifeCycleManager.UnregisterPresenter(this);
+
+        if (_view as MonoBehaviour != null)
+        {
+            MonoBehaviour.Destroy(_view.GetGameObject());
+        }
     }
 
     public void Initialize()
@@ -84,8 +89,14 @@ public class WeaponPresenter : IWeaponPresenter
                 }
             }
             IProjectilePresenter projectilePresenter = _projectileFactory.Create(i, projectileSpawnPosition, newPosition, _model.Type.ProjectileType);
+            projectilePresenter.OnPresenterDestroyProjectileTriggered += HandleOnPresenterDestroyProjectileTriggered;
             _waitingProjectiles.Add(projectilePresenter);
         }
+    }
+
+    private void HandleOnPresenterDestroyProjectileTriggered(IProjectilePresenter projectilePresenter)
+    {
+        _waitingProjectiles.Remove(projectilePresenter);
     }
 
     public void LaunchProjectile()

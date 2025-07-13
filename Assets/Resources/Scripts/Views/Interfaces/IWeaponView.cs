@@ -9,4 +9,5 @@ public interface IWeaponView
     void SetRotation(Quaternion rotation);
     Transform GetProjectileSpawnPosition();
     void StartWeaponCoroutine(IEnumerator coroutine);
+    GameObject GetGameObject();
 }

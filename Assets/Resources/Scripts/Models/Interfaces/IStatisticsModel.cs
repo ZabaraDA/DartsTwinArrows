@@ -7,6 +7,7 @@ public interface IStatisticsModel
     float Accuracy { get; }
     int Points { get; set; }
     int TotalPoints { get; set; }
+    bool IsActive { get; set; }
 
     event Action<float> OnModelTotalTimeChanged;
     event Action<int> OnModelPointsChanged;

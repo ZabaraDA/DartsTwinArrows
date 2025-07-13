@@ -20,7 +20,7 @@ public class GameModel : IGameModel
             {
                 _currentLevelModel = value;
                 OnModelCurrentLevelModelChanged?.Invoke(_currentLevelModel);
-                Debug.Log($"Field '{nameof(CurrentLevelModel)}' changed in class {GetType()}. Value: {CurrentLevelModel}");
+                Debug.Log($"Field '{nameof(CurrentLevelModel)}' changed in class {GetType()}. Value: {CurrentLevelModel.Number}");
             }
         }
     }

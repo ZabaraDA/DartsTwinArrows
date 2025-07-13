@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyView : MonoBehaviour, IEnemyView
@@ -30,6 +31,7 @@ public class EnemyView : MonoBehaviour, IEnemyView
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("ENEMY TakeDamage");
         OnViewTakeDamageTriggered?.Invoke(damage);
     }
 

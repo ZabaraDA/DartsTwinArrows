@@ -37,4 +37,9 @@ public class WeaponView : MonoBehaviour, IWeaponView
     {
         StartCoroutine(coroutine);
     }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 }

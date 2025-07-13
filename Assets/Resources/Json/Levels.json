@@ -27,6 +27,7 @@
     {
       "number": 4,
       "weaponId": 1,
+      "enemyId": 4,
       "enemyCount": 7,
       "spawnCount": 7,
       "spawnAtCenter": true

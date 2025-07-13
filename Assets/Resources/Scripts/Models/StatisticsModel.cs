@@ -49,6 +49,8 @@ public class StatisticsModel : IStatisticsModel
         }
     }
 
+    public bool IsActive { get; set; }
+
     public event Action<float> OnModelTotalTimeChanged;
     public event Action<int> OnModelPointsChanged;
     public event Action<int> OnModelTotalPointsChanged;
@@ -58,6 +60,7 @@ public class StatisticsModel : IStatisticsModel
         Points = points;
         TotalTime = totalTime;
         TotalPoints = totalPoints;
+        IsActive = true;
     }
 
     public StatisticsModel()
@@ -65,6 +68,7 @@ public class StatisticsModel : IStatisticsModel
         Points = 0;
         TotalTime = 0;
         TotalPoints = 0;
+        IsActive = true;
     }
 
     public void AddPoints(int points)

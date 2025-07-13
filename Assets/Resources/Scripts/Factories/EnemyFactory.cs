@@ -3,10 +3,11 @@ using UnityEngine;
 public class EnemyFactory : IEnemyFactory
 {
     private IEnemyLifeCycleManager _manager; // —сылка на менеджер
-
-    public EnemyFactory(IEnemyLifeCycleManager manager)
+    private IStatisticsPresenter _statisticsPresenter;
+    public EnemyFactory(IEnemyLifeCycleManager manager, IStatisticsPresenter statisticsPresenter)
     {
         _manager = manager;
+        _statisticsPresenter = statisticsPresenter;
     }
 
     public IEnemyPresenter Create(IEnemyModel model)
@@ -25,7 +26,7 @@ public class EnemyFactory : IEnemyFactory
             return null;
         }
 
-        IEnemyPresenter presenter = new EnemyPresenter(view, model, _manager);
+        IEnemyPresenter presenter = new EnemyPresenter(view, model, _manager, _statisticsPresenter);
         presenter.Initialize(); // »нициализируем презентер
 
         return presenter;

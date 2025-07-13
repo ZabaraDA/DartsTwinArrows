@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -20,12 +21,13 @@ public class GamePresenter : IGamePresenter
         _view.OnViewPauseButtonClicked -= HandleOnViewPauseButtonClicked;
         _view.OnViewContinueButtonClicked -= HandleOnViewContinueButtonClicked;
 
-        _model.OnModelCurrentLevelModelChanged += HandleOnModelCurrentLevelModelChanged;
+        _model.OnModelCurrentLevelModelChanged -= HandleOnModelCurrentLevelModelChanged;
     }
     public void Initialize()
     {
         _view.OnViewPauseButtonClicked += HandleOnViewPauseButtonClicked;
         _view.OnViewContinueButtonClicked += HandleOnViewContinueButtonClicked;
+        _model.OnModelCurrentLevelModelChanged += HandleOnModelCurrentLevelModelChanged;
         _statisticsPresenter.Initialize();
 
         LoadLevel(_model.CurrentLevelModel);
@@ -44,10 +46,25 @@ public class GamePresenter : IGamePresenter
         _view.SetLevelText($"LEVEL {levelModel.Number}");
     }
 
-    private void HandleOnPresenterLevelCompletedTriggered(ILevelPresenter levelPresenter)
+    private void LoadNextLevel(ILevelModel levelModel)
+    {
+        Debug.Log("LOADNEXTLEVEL");
+        ILevelModel nextLevelModel = _model.LevelModels.FirstOrDefault(x => x.Number == (levelModel.Number + 1));
+        if (nextLevelModel != null)
+        {
+            _model.CurrentLevelModel = nextLevelModel;
+        }
+        else
+        {
+            _statisticsPresenter.StopTimer();
+            _statisticsPresenter.ChangeVisibilityStatisticsPanel(true);
+        }
+    }
+
+    private void HandleOnPresenterLevelCompletedTriggered(ILevelPresenter levelPresenter, ILevelModel levelModel)
     {
         levelPresenter.OnPresenterLevelCompletedTriggered -= HandleOnPresenterLevelCompletedTriggered;
-
+        LoadNextLevel(levelModel);
     }
 
     private void HandleOnViewPauseButtonClicked()
