@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class EnemyView : MonoBehaviour, IEnemyView
     public event Action<int> OnViewTakeDamageTriggered;
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private GameObject _textContainer;
+    [SerializeField]
+    private TMP_Text _text;
 
     public void SetPosition(Vector2 newPosition)
     {
@@ -38,5 +43,16 @@ public class EnemyView : MonoBehaviour, IEnemyView
     public void SetSprite(Sprite sprite)
     {
         _spriteRenderer.sprite = sprite;
+    }
+
+    public void OpenCard()
+    {
+        _spriteRenderer.sprite = null;
+        _textContainer.SetActive(true);
+    }
+
+    public void SetText(string text)
+    {
+        _text.text = text;
     }
 }

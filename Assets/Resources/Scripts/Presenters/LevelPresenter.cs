@@ -29,9 +29,9 @@ public class LevelPresenter : ILevelPresenter
 
     public void Dispose()
     {
+        OnPresenterLevelCompletedTriggered?.Invoke(this, _model);
         _model.OnModelCurrentEnemyCountChanged -= HandleOnModelCurrentEnemyCountChanged;
         _weaponPresenter?.Dispose();
-        OnPresenterLevelCompletedTriggered?.Invoke(this, _model);
     }
 
     private void SpawnWeapon()
@@ -40,17 +40,40 @@ public class LevelPresenter : ILevelPresenter
     }
     private IEnumerator SpawnEnemies()
     {
-        Vector2 spawnPosition = new Vector2();
+        Vector2 topSpawnPosition1 = new Vector2(-300, 800);
+        Vector2 topSpawnPosition2 = new Vector2(100, 800);
+        Vector2 centerSpawnPosition = new Vector2();
+        Vector2 centerSpawnPosition2 = new Vector2(-420, 0);
+        string text = "JACKPOT";
+
         for (int i = 1; i <= _model.EnemyCount / _model.SpawnCount; i++)
         {
-            for (int y = 1; y <= _model.SpawnCount; y++)
+            Vector2 enemySpawnPosition = centerSpawnPosition;
+            if (_model.EnemyType.Number == 2 || _model.EnemyType.Number == 3)
             {
-                IEnemyPresenter enemyPresenter = _enemyFactory.Create(i*y, _model.EnemyType, spawnPosition);
+                if (i % 2 == 0)
+                {
+                    enemySpawnPosition = topSpawnPosition1;
+                }
+                else
+                {
+                    enemySpawnPosition = topSpawnPosition2;
+                }
+            }
+            else if (_model.EnemyType.Number == 4)
+            {
+                enemySpawnPosition = centerSpawnPosition2;
+            }
+            for (int y = 0; y < _model.SpawnCount; y++)
+            {
+                Vector2 spawnPosition = new Vector2(enemySpawnPosition.x + (y * 140f), enemySpawnPosition.y);
+                string textPart = text[y].ToString(); 
+                IEnemyPresenter enemyPresenter = _enemyFactory.Create(i*(y+1), _model.EnemyType, spawnPosition, textPart);
                 enemyPresenter.OnPresenterEnemyPresenterDestoyed += HandleOnPresenterEnemyPresenterDestoyed;
                 _enemyPresenters.Add(enemyPresenter);
                 _statisticsPresenter.AddTotalPoints(_model.EnemyType.Healts);
-                yield return new WaitForSeconds(2f);
             }
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -59,7 +82,7 @@ public class LevelPresenter : ILevelPresenter
         enemyPresenter.OnPresenterEnemyPresenterDestoyed -= HandleOnPresenterEnemyPresenterDestoyed;
         _enemyPresenters.Remove(enemyPresenter);
         _model.CurrentEnemyCount -= 1;
-
+        Debug.Log("CurrentEnemyCount: " + _model.CurrentEnemyCount);
     }
     public void Initialize()
     {

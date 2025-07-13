@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IEnemyModel
 {
     int Id { get; set; }
+    string Text { get; set; }
     int CurrentHealts { get; set; }
     IEnemyTypeModel Type { get; set; }
     Vector2 Position { get; set; }

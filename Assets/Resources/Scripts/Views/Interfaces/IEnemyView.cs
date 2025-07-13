@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IEnemyView
 {
     void SetPosition(Vector2 newPosition);
+    void SetText(string text);
     void SetRotation(Quaternion newRotation);
 
     GameObject GetGameObject();
@@ -12,4 +13,6 @@ public interface IEnemyView
     event Action<int> OnViewTakeDamageTriggered;
     void TakeDamage(int damage);
     void SetSprite(Sprite sprite);
+
+    void OpenCard();
 }

@@ -33,6 +33,8 @@ public class EnemyModel : IEnemyModel
         }
     }
 
+    public string Text { get; set; }
+
     public event Action<int> OnModelHealtsChanged;
     public event Action<Vector2> OnModelPositionChanged;
 
@@ -41,12 +43,13 @@ public class EnemyModel : IEnemyModel
         CurrentHealts -= damage;
     }
 
-    public EnemyModel(int id, IEnemyTypeModel type, Vector2 position)
+    public EnemyModel(int id, IEnemyTypeModel type, Vector2 position, string text)
     {
         Id = id;
         Type = type;
         Position = position;
         CurrentHealts = type.Healts;
+        Text = text;
     }
 
     public void UpdatePosition(float deltaTime)

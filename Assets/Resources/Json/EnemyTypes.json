@@ -8,7 +8,7 @@
       "damage": 1,
       "isStatic": true,
       "points": 150,
-      "sizeMultiplier": 3,
+      "sizeMultiplier": 4,
       "spriteNumber": 1
     },
     {
@@ -36,7 +36,7 @@
     {
       "number": 4,
       "name": "Card",
-      "healts": 1,
+      "healts": 2,
       "speed": 0,
       "damage": 1,
       "isStatic": true,

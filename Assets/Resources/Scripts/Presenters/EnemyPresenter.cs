@@ -49,6 +49,7 @@ public class EnemyPresenter : IEnemyPresenter
 
         _view.SetPosition(_model.Position);
         _view.SetSprite(_model.Type.Sprite);
+        _view.SetText(_model.Text);
 
         _manager.RegisterPresenter(this);
     }
@@ -76,10 +77,18 @@ public class EnemyPresenter : IEnemyPresenter
     private void HandleOnViewTakeDamageTriggered(int damage)
     {
         _model.TakeDamage(damage);
+        if (_model.CurrentHealts == 1 && _model.Type.Number == 4)
+        {
+            _view.OpenCard();
+        }
         _statisticsPresenter.AddPoints(damage);
     }
     private void HandleOnViewCollider2DTriggered(Collider2D other)
     {
-
+        if (other.CompareTag("Finish"))
+        {
+            Debug.Log("Finish!");
+            Dispose();
+        }
     }
 }

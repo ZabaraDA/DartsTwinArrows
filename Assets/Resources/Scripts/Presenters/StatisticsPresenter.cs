@@ -19,6 +19,11 @@ public class StatisticsPresenter : IStatisticsPresenter
         _model.OnModelTotalPointsChanged -= HandleOnModelTotalPointsChanged;
 
         _lifeCycleManager.UnregisterPresenter(this);
+
+        //if (_view as MonoBehaviour != null)
+        //{
+        //    MonoBehaviour.Destroy(_view.GetGameObject());
+        //}
     }
 
     public void Initialize()

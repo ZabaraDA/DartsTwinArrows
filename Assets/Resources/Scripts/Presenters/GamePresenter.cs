@@ -22,13 +22,14 @@ public class GamePresenter : IGamePresenter
         _view.OnViewContinueButtonClicked -= HandleOnViewContinueButtonClicked;
 
         _model.OnModelCurrentLevelModelChanged -= HandleOnModelCurrentLevelModelChanged;
+        //_statisticsPresenter.Dispose();
     }
     public void Initialize()
     {
         _view.OnViewPauseButtonClicked += HandleOnViewPauseButtonClicked;
         _view.OnViewContinueButtonClicked += HandleOnViewContinueButtonClicked;
         _model.OnModelCurrentLevelModelChanged += HandleOnModelCurrentLevelModelChanged;
-        _statisticsPresenter.Initialize();
+        //_statisticsPresenter.Initialize();
 
         LoadLevel(_model.CurrentLevelModel);
         Debug.Log("GamePresenter inizialized");

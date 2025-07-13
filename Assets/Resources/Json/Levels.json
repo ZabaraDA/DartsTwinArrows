@@ -12,8 +12,8 @@
       "number": 2,
       "weaponId": 2,
       "enemyId": 2,
-      "enemyCount": 15,
-      "spawnCount": 1,
+      "enemyCount": 16,
+      "spawnCount": 2,
       "spawnAtCenter": false
     },
     {

@@ -32,9 +32,9 @@ public class EnemyFactory : IEnemyFactory
         return presenter;
     }
 
-    public IEnemyPresenter Create(int id, IEnemyTypeModel projectileType, Vector2 position)
+    public IEnemyPresenter Create(int id, IEnemyTypeModel projectileType, Vector2 position, string text = null)
     {
-        IEnemyModel model = new EnemyModel(id, projectileType, position);
+        IEnemyModel model = new EnemyModel(id, projectileType, position, text);
         return Create(model);
     }
 }

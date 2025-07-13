@@ -18,7 +18,7 @@ public class StatisticsModel : IStatisticsModel
         }
     }
 
-    public float Accuracy => Points > 0 && TotalPoints > 0 ? (Points / TotalPoints * 100) : 0;
+    public float Accuracy => TotalPoints > 0 ? (Points * 100f / TotalPoints ) : 100;
 
     private int _points;
     public int Points

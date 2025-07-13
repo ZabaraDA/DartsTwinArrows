@@ -6,4 +6,5 @@ public interface IStatisticsView
     void SetAccurancyText(string text);
     void SetPointsText(string text);
     void SetActive(bool isActive);
+    GameObject GetGameObject();
 }

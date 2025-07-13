@@ -29,4 +29,8 @@ public class StatisticsView : MonoBehaviour, IStatisticsView
     {
         _timeText.text = text;
     }
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 }
