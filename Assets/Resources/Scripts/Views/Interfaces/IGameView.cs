@@ -9,6 +9,7 @@ public interface IGameView
     void SetActivePausePanel(bool isActive);
     void SetLevelText(string text);
     void SetScoreText(string text);
+    void SetImageBackground(Sprite sprite);
 
     Transform GetWeaponSpawnPosition();
 }

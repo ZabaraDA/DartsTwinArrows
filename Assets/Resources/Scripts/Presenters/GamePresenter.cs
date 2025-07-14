@@ -44,7 +44,12 @@ public class GamePresenter : IGamePresenter
         ILevelPresenter levelPresenter = _levelFactory.Create(levelModel);
         levelPresenter.OnPresenterLevelCompletedTriggered += HandleOnPresenterLevelCompletedTriggered;
 
-        _view.SetLevelText($"LEVEL {levelModel.Number}");
+        Sprite background = Resources.Load<Sprite>($"Images/Level {levelModel.Number} Background");
+        if (_view != null)
+        {
+            _view.SetImageBackground(background);
+            _view.SetLevelText($"LEVEL {levelModel.Number}");
+        }
     }
 
     private void LoadNextLevel(ILevelModel levelModel)
@@ -57,8 +62,17 @@ public class GamePresenter : IGamePresenter
         }
         else
         {
-            _statisticsPresenter.StopTimer();
-            _statisticsPresenter.ChangeVisibilityStatisticsPanel(true);
+            Sprite background = Resources.Load<Sprite>($"Images/Level 1 Background");
+            if (_view != null)
+            {
+
+                _view.SetImageBackground(background);
+            }
+            if (_statisticsPresenter != null)
+            {
+                _statisticsPresenter.StopTimer();
+                _statisticsPresenter.ChangeVisibilityStatisticsPanel(true);
+            }
         }
     }
 

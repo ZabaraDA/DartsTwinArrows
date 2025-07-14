@@ -230,6 +230,7 @@ MonoBehaviour:
   _continueButton: {fileID: 1192077247}
   _pausePanel: {fileID: 1908307735}
   _menuPanel: {fileID: 802999111}
+  _backgroundImage: {fileID: 371842775}
   _weaponSpawnPosition: {fileID: 184341495}
   _enemySpawnPosition: {fileID: 1271291412}
 --- !u!4 &132114988
@@ -561,7 +562,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5679158726236666338, guid: d529547fe53828946a62c869491454df, type: 3}
+  m_Sprite: {fileID: 8321743022949834334, guid: 05ab4f4bfddc0594292ced52dbb64c7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

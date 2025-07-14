@@ -19,6 +19,8 @@ public class GameView : MonoBehaviour, IGameView
     private GameObject _pausePanel;
     [SerializeField] 
     private GameObject _menuPanel;
+    [SerializeField]
+    private SpriteRenderer _backgroundImage;
 
     [SerializeField]
     private Transform _weaponSpawnPosition;
@@ -62,5 +64,10 @@ public class GameView : MonoBehaviour, IGameView
     public Transform GetWeaponSpawnPosition()
     {
         return _weaponSpawnPosition;
+    }
+
+    public void SetImageBackground(Sprite sprite)
+    {
+        _backgroundImage.sprite = sprite;
     }
 }
