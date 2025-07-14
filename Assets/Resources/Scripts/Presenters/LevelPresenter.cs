@@ -15,6 +15,7 @@ public class LevelPresenter : ILevelPresenter
 
     private IWeaponPresenter _weaponPresenter;
     private ICollection<IEnemyPresenter> _enemyPresenters;
+    
 
     public LevelPresenter(ILevelView view, ILevelModel model, IWeaponFactory weaponFactory, IEnemyFactory enemyFactory, IStatisticsPresenter statisticsPresenter)
     {
@@ -43,7 +44,7 @@ public class LevelPresenter : ILevelPresenter
         Vector2 topSpawnPosition1 = new Vector2(-300, 800);
         Vector2 topSpawnPosition2 = new Vector2(100, 800);
         Vector2 centerSpawnPosition = new Vector2();
-        Vector2 centerSpawnPosition2 = new Vector2(-420, 0);
+        Vector2 centerSpawnPosition2 = new Vector2(-390, 0);
         string text = "JACKPOT";
 
         for (int i = 1; i <= _model.EnemyCount / _model.SpawnCount; i++)
@@ -66,7 +67,7 @@ public class LevelPresenter : ILevelPresenter
             }
             for (int y = 0; y < _model.SpawnCount; y++)
             {
-                Vector2 spawnPosition = new Vector2(enemySpawnPosition.x + (y * 140f), enemySpawnPosition.y);
+                Vector2 spawnPosition = new Vector2(enemySpawnPosition.x + (y * 130f), enemySpawnPosition.y);
                 string textPart = text[y].ToString(); 
                 IEnemyPresenter enemyPresenter = _enemyFactory.Create(i*(y+1), _model.EnemyType, spawnPosition, textPart);
                 enemyPresenter.OnPresenterEnemyPresenterDestoyed += HandleOnPresenterEnemyPresenterDestoyed;

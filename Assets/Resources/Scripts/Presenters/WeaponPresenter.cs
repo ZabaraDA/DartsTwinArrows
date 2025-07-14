@@ -32,6 +32,17 @@ public class WeaponPresenter : IWeaponPresenter
         {
             MonoBehaviour.Destroy(_view.GetGameObject());
         }
+
+        if (GameModel.CurrentLevelNumber == 2)
+        {
+            Debug.Log("Destroy Point");
+            var destroyPoints = GameObject.FindGameObjectsWithTag("Destroy Point");
+            foreach (var destroyPoint in destroyPoints)
+            {
+                Debug.Log("Destroy Point 1");
+                MonoBehaviour.Destroy(destroyPoint);
+            }
+        }
     }
 
     public void Initialize()
@@ -58,7 +69,15 @@ public class WeaponPresenter : IWeaponPresenter
     }
     private void HandleOnViewMouseButtonClick()
     {
+       
         LaunchProjectile();
+        if (GameModel.CurrentLevelNumber == 1)
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+            GameObject destroyPointPrefab = Resources.Load<GameObject>("Prefabs/Destroy Point");
+            GameObject destroyPoint = MonoBehaviour.Instantiate(destroyPointPrefab, mousePosition, Quaternion.identity);
+        }
     }
 
     private void HandleOnModelSpriteChanged(Sprite sprite)

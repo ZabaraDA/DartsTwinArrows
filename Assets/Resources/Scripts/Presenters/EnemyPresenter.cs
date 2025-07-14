@@ -51,6 +51,11 @@ public class EnemyPresenter : IEnemyPresenter
         _view.SetSprite(_model.Type.Sprite);
         _view.SetText(_model.Text);
 
+        if (_model.Type.Number == 1)
+        {
+            _view.SetColliderEnabled(false);
+        }
+
         _manager.RegisterPresenter(this);
     }
 

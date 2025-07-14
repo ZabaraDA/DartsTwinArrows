@@ -3,7 +3,7 @@
     {
       "number": 1,
       "name": "Dartboard",
-      "healts": 1,
+      "healts": 15,
       "speed": 0,
       "damage": 1,
       "isStatic": true,

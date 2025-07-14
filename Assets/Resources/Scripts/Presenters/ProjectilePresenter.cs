@@ -52,6 +52,21 @@ public class ProjectilePresenter : IProjectilePresenter
             }
             Dispose();
         }
+        else if(other.CompareTag("Destroy Point"))
+        {
+            MonoBehaviour.Destroy(other.gameObject);
+            if (other.gameObject.transform.position.x < 300
+                && other.gameObject.transform.position.x > -300
+                && other.gameObject.transform.position.y < 300
+                && other.gameObject.transform.position.y > -300)
+            {
+                var enemy = GameObject.FindWithTag("Enemy");
+                var enemyView = enemy.GetComponent<IEnemyView>();
+                enemyView.TakeDamage(_model.Type.Damage);
+            }
+            
+            Dispose();
+        }
     }
 
     public void Dispose()

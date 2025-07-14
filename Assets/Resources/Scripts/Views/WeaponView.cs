@@ -15,6 +15,10 @@ public class WeaponView : MonoBehaviour, IWeaponView
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //mousePosition.z = 0;
+            //GameObject destroyPointPrefab = Resources.Load<GameObject>("Prefabs/Destroy Point");
+            //GameObject destroyPoint = MonoBehaviour.Instantiate(destroyPointPrefab, mousePosition, Quaternion.identity);
             OnViewMouseButtonClick?.Invoke();
         }
     }

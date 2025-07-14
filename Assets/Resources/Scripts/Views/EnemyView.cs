@@ -13,6 +13,8 @@ public class EnemyView : MonoBehaviour, IEnemyView
     private GameObject _textContainer;
     [SerializeField]
     private TMP_Text _text;
+    [SerializeField]
+    private Collider2D _collider;
 
     public void SetPosition(Vector2 newPosition)
     {
@@ -54,5 +56,10 @@ public class EnemyView : MonoBehaviour, IEnemyView
     public void SetText(string text)
     {
         _text.text = text;
+    }
+
+    public void SetColliderEnabled(bool isEnabled)
+    {
+        _collider.enabled = isEnabled;
     }
 }

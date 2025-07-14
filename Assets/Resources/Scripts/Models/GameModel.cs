@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameModel : IGameModel
 {
+    public static int CurrentLevelNumber;
     public ICollection<ILevelModel> LevelModels { get; set; }
 
     private ILevelModel _currentLevelModel; 
@@ -19,6 +20,7 @@ public class GameModel : IGameModel
             if (_currentLevelModel != value)
             {
                 _currentLevelModel = value;
+                CurrentLevelNumber = _currentLevelModel.Number;
                 OnModelCurrentLevelModelChanged?.Invoke(_currentLevelModel);
                 Debug.Log($"Field '{nameof(CurrentLevelModel)}' changed in class {GetType()}. Value: {CurrentLevelModel.Number}");
             }

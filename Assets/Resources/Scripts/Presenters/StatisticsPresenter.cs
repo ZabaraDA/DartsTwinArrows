@@ -45,7 +45,7 @@ public class StatisticsPresenter : IStatisticsPresenter
     }
     private void HandleOnModelTotalPointsChanged(int totalPoints)
     {
-        _view.SetAccurancyText($"{_model.Accuracy}%");
+        _view.SetAccurancyText($"{_model.Accuracy.ToString("F1")}%");
     }
     private void HandleOnModelPointsChanged(int points)
     {

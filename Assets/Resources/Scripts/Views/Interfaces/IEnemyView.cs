@@ -6,6 +6,7 @@ public interface IEnemyView
     void SetPosition(Vector2 newPosition);
     void SetText(string text);
     void SetRotation(Quaternion newRotation);
+    void SetColliderEnabled(bool isEnabled);
 
     GameObject GetGameObject();
 
