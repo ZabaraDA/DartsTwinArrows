@@ -30,10 +30,24 @@ public class LevelPresenter : ILevelPresenter
 
     public void Dispose()
     {
+        // Вызываем событие завершения уровня
         OnPresenterLevelCompletedTriggered?.Invoke(this, _model);
+
+        // Отписываемся от событий модели
         _model.OnModelCurrentEnemyCountChanged -= HandleOnModelCurrentEnemyCountChanged;
+
+        // Очищаем всех врагов
+        foreach (var enemyPresenter in _enemyPresenters.ToList()) // ToList() для безопасного удаления
+        {
+            enemyPresenter.OnPresenterEnemyPresenterDestoyed -= HandleOnPresenterEnemyPresenterDestoyed;
+            enemyPresenter.Dispose();
+        }
+        _enemyPresenters.Clear();
+
+        // Очищаем оружие
         _weaponPresenter?.Dispose();
     }
+
 
     private void SpawnWeapon()
     {
@@ -85,6 +99,7 @@ public class LevelPresenter : ILevelPresenter
         _model.CurrentEnemyCount -= 1;
         Debug.Log("CurrentEnemyCount: " + _model.CurrentEnemyCount);
     }
+
     public void Initialize()
     {
         _model.OnModelCurrentEnemyCountChanged += HandleOnModelCurrentEnemyCountChanged;

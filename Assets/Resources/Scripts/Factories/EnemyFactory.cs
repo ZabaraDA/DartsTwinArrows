@@ -27,7 +27,7 @@ public class EnemyFactory : IEnemyFactory
         }
 
         IEnemyPresenter presenter = new EnemyPresenter(view, model, _manager, _statisticsPresenter);
-        presenter.Initialize(); // Инициализируем презентер
+        presenter.Initialize(); // Инициализируем презентер                                                                                                                                                 
 
         return presenter;
     }

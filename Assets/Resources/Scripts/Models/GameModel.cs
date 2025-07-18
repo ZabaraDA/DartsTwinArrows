@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameModel : IGameModel
 {
     public static int CurrentLevelNumber;
+
     public ICollection<ILevelModel> LevelModels { get; set; }
 
     private ILevelModel _currentLevelModel; 
