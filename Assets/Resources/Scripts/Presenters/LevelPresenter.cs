@@ -46,6 +46,12 @@ public class LevelPresenter : ILevelPresenter
 
         // Очищаем оружие
         _weaponPresenter?.Dispose();
+
+        var destroyProjectiles = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var destroyProjectile in destroyProjectiles)
+        {
+            MonoBehaviour.Destroy(destroyProjectile);
+        }
     }
 
 

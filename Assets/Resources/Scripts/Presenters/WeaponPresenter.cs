@@ -39,9 +39,14 @@ public class WeaponPresenter : IWeaponPresenter
             var destroyPoints = GameObject.FindGameObjectsWithTag("Destroy Point");
             foreach (var destroyPoint in destroyPoints)
             {
-                Debug.Log("Destroy Point 1");
                 MonoBehaviour.Destroy(destroyPoint);
             }
+        }
+
+        var destroyProjectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (var destroyProjectile in destroyProjectiles)
+        {
+            MonoBehaviour.Destroy(destroyProjectile);
         }
     }
 

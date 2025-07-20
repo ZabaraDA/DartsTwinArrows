@@ -6,19 +6,19 @@ public class EnemyLifeCycleManager : MonoBehaviour, IEnemyLifeCycleManager
 {
     private List<IEnemyPresenter> _activePresenters;
 
-    private static EnemyLifeCycleManager _instance;
+    //private static EnemyLifeCycleManager _instance;
 
     private void Awake()
     {
         // Реализация паттерна Singleton
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (_instance != null && _instance != this)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
         
-        _instance = this;
-        DontDestroyOnLoad(gameObject); // Не уничтожать при загрузке новой сцены
+        //_instance = this;
+        //DontDestroyOnLoad(gameObject); // Не уничтожать при загрузке новой сцены
         _activePresenters = new List<IEnemyPresenter>();
     }
 

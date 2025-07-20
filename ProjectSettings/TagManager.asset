@@ -10,6 +10,7 @@ TagManager:
   - Destroy Point
   - Black
   - DataStorage
+  - Level
   layers:
   - Default
   - TransparentFX

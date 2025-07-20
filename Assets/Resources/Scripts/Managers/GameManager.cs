@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private IStatisticsPresenter _statisticsPresenter;
     private void Start()
     {
+        Time.timeScale = 1.0f;
         _gamePresenter.Initialize();
         _statisticsPresenter.Initialize();
     }
@@ -21,6 +22,6 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         _gamePresenter.Dispose();
-        //_statisticsPresenter.Dispose();
+        _statisticsPresenter.Dispose();
     }
 }

@@ -75,6 +75,12 @@ public class GamePresenter : IGamePresenter, IInitializable, IDisposable
 
         _statisticsPresenter = null;
         _levelFactory = null;
+
+        var destroyProjectiles = GameObject.FindGameObjectsWithTag("Level");
+        foreach (var destroyProjectile in destroyProjectiles)
+        {
+            MonoBehaviour.Destroy(destroyProjectile);
+        }
     }
 
     public void Initialize()
